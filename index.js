@@ -1,4 +1,4 @@
-const fs = require('fs');
+ fs = require('fs');
 //Write method --> With Sync 
 // fs.writeFileSync("rick.txt","Rick")
 
@@ -36,7 +36,6 @@ const fs = require('fs');
 
 // Unlibnk File --> With Sync
 // fs.unlinkSync("rick1.txt")
-
 
 // Unlink File ---> With Async 
 // fs.unlink("rick21.txt",(err,data)=>{
