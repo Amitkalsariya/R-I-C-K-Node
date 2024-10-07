@@ -1,15 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* General page styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Table styles */
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #d1f7d1;
+        }
+
+        /* Form styles */
+        form {
+            width: 50%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form table {
+            width: 100%;
+        }
+
+        form input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Button styles */
+        button {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e60000;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        button a:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
 </head>
+
 <body>
+
+    <h2>Crud Operations</h2>
+
     <form action="myData">
-       Name  <input type="text" name="name"><br><br>
-        Surname<input type="text" name="sname"><br><br>
-        <input type="submit" name="">
+        <table>
+            <tr>
+                <td><label for="name">Name</label></td>
+                <td><input type="text" name="name" value="<%= (editData) ? editData.name : '' %>" id="name"></td>
+            </tr>
+            <tr>
+                <td><label for="sname">Surname</label></td>
+                <td><input type="text" name="sname" value="<%= (editData) ? editData.sname : '' %>" id="sname"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
+        </table>
     </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Delete</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                list.map((el,i)=>{ 
+            %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td><%= el.name %></td>
+                <td><%= el.sname %></td>
+                <td>
+                    <button>
+                        <a href="/deleteData?delete=<%= i %>">Delete</a>
+                    </button>
+                </td>
+                <td>
+                    <button>
+                        <a href="/editData?edit=<%= i %>">Edit</a>
+                    </button>
+                </td>
+            </tr>
+            <%
+                })
+            %>
+        </tbody>
+    </table>
+
 </body>
 </html>
