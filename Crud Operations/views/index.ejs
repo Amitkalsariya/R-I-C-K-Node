@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/addData">
+        <table>
+            <tr>
+                <td>Name </td>
+                <td><input type="text" name="name"  value="()"></td>
+            </tr>
+            <tr>
+                <td>Surname </td>
+                <td><input type="text" name="sname" value=""></td>
+            </tr>
+            <tr>
+                <td>City </td>
+                <td><input type="text" name="city" value=""></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+    <table border="1">
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>City</th>
+            <th>Delete</th>
+        </tr>
+        <%
+            myData.map((el,i)=>{
+         %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td><%= el.name %></td>
+                <td><%= el.sname %></td>
+                <td><%= el.city %></td>
+                <td><button><a href="/deleteData?delete=<%= i %>">Delete</a></button></td>
+                <td><button><a href="/editData?edit=<%= i %>">Update</a></button></td>
+            </tr> 
+        <%      
+            })
+        %>
+    </table>
+</body>
+</html>
