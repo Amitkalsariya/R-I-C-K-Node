@@ -194,7 +194,7 @@
         <div class="flex flex-wrap">
          
            
-            <div class="w-50">
+            <!-- <div class="w-50">
                 <div class="card">
                     <div class="flex">
                         <div class="box-25">
@@ -232,7 +232,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
                
             <% 
                 list.map((el,i)=>{
@@ -247,14 +247,14 @@
                         <div class="box-40">
                             <div class="product-content">
                                 <h2><%= el.productName %></h2>
-                                <span></span>
+                                <span><%= el.productCode %></span>
                             </div>
                             <div class="product-prise flex a-i-b">
-                                <span></span>
-                                <h1></h1>
+                                <span>Rs</span>
+                                <h1><%= el.productPrise %></h1>
                             </div>
                             <div class="product-button">
-                                <button class="buy--btn">Details</button>
+                                <button class="buy--btn"><a href="/showData?show=<%= i %>">Details</a></button>
 
                             </div>
                         </div>
@@ -262,13 +262,13 @@
                             <div class="productselect-heading">
                                 <h5>SELECT A FRUIT</h5>
                                 <ul class="flex flex-wrap">
-                                    <li><img src=""
+                                    <li><img src="<%= el.images[0] %>"
                                             alt="green apple"></li>
-                                    <li><img src=""
+                                    <li><img src="<%= el.images[1] %>"
                                             alt="yellow apple"></li>
-                                    <li><img src=""
+                                    <li><img src="<%= el.images[2] %>"
                                             alt="orange apple"></li>
-                                    <li><img src=""
+                                    <li><img src="<%= el.images[3] %>"
                                             alt="red apple"></li>
                                 </ul>
                             </div>
