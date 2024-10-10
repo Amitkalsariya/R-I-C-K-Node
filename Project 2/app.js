@@ -17,7 +17,5 @@ app.get('/showData',(req,res)=>{
     let showData=list[eId]
     res.render('product',{showData,list})
 })
-app.get('/return',(req,res)=>{
-    res.render('index')
-})
+
 app.listen(2104)
