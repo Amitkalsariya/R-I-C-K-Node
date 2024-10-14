@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser')
 const express = require('express')
 const app = express()
 const fs = require('fs')
@@ -5,6 +6,7 @@ app.set('view engine', 'ejs')
 let list = []
 let editData = null
 let eId = null
+app.use(bodyParser.urlencoded({extended:true}))
 const data = fs.readFileSync('data.json', 'utf-8')
 if (data != '') {
     list = JSON.parse(data)
@@ -12,8 +14,8 @@ if (data != '') {
 app.get('/', (req, res) => {
     res.render('second', { list, editData })
 })
-app.get('/myData', (req, res) => {
-    const data = req.query
+app.post('/myData', (req, res) => {
+    const data = req.body
 
     if (eId != null) {
         list[eId] = data
@@ -27,8 +29,8 @@ app.get('/myData', (req, res) => {
     res.redirect('/')
 
 })
-app.get('/deleteData', (req, res) => {
-    const dId = req.query.delete
+app.get('/deleteData/:delete', (req, res) => {
+    const dId = req.params.delete
     list.splice(dId, 1)
     fs.writeFileSync('data.json', JSON.stringify(list))
     res.redirect('/')

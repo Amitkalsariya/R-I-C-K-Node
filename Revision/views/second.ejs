@@ -117,7 +117,7 @@
 
     <h2>Crud Operations</h2>
 
-    <form action="/myData">
+    <form action="/myData" method="post">
         <table>
             <tr>
                 <td><label for="name">Name</label></td>
@@ -155,7 +155,7 @@
                 <td><%= el.sname %></td>
                 <td>
                     <button>
-                        <a href="/deleteData?delete=<%= i %>">Delete</a>
+                        <a href="/deleteData/=<%= i %>">Delete</a>
                     </button>
                 </td>
                 <td>
