@@ -28,4 +28,4 @@ app.post('/addData',(req,res)=>{
     })
     res.redirect('/')
 })
-app.listen(1311)
+app.listen(1311)    
