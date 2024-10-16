@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +46,7 @@
             margin-bottom: 15px;
             box-sizing: border-box;
         }
+
         input[type="password"] {
             width: 100%;
             padding: 10px;
@@ -87,21 +89,51 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="form-container">
         <h2>Crud Form</h2>
         <form action="/addData" method="post">
             <label for="uid">User Id</label>
-            <input type="text" id="uid" name="uid" placeholder="Enter your User ID" required>
+            <input type="text" id="uid" name="uid" placeholder="Enter your User ID"
+                value="<%= (editResult)? editResult.uid :'' %>" required>
 
             <label for="pwd">Password</label>
-            <input type="password" id="pwd" name="pwd" placeholder="Enter your Password" required>
+            <input type="password" id="pwd" name="pwd" placeholder="Enter your Password"
+                value="<%= (editResult)?editResult.password : '' %>" required>
 
             <button type="submit">Submit</button>
         </form>
-      
+
     </div>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>User Id</th>
+            <th>Password</th>
+            <th>Delete</th>
+            <th>Update</th>
+        </tr>
+        <% result.map((el,i)=>{
+            %>
+            <tr>
+                <td>
+                    <%= el.id %>
+                </td>
+                <td>
+                    <%= el.uid %>
+                </td>
+                <td>
+                    <%= el.password %>
+                </td>
+                <td><button><a href="/deleteData?delete=<%= el.id %>">Delete</a></button></td>
+                <td><button><a href="/editData?edit=<%= el.id %>">Edit</a></button></td>
+
+            </tr>
+            <% }) %>
+    </table>
 
 </body>
+
 </html>
