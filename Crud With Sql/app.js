@@ -19,23 +19,26 @@ app.get('/', (req, res) => {
     var qry = `SELECT * FROM tblentry `
     con.query(qry, (error, result) => {
         if (error) throw error
-        res.render('form', { result, editResult: null ,eId})
+        res.render('form', { result, editResult: null})
 
 
     })
 })
 app.post('/addData', (req, res) => {
     const list = req.body
-    const eId = req.body.edit
-
-    if(eId)
+    let id = req.body.id
+    console.log("---",list);
+    
+    if(id)
     {
-        const qry=`UPDATE tblentry SET uid='${list.uid}' AND password='${list.password} WHERE id='${eId}''`
-        req.query(qry,(error,result)=>{
+        const qry=`UPDATE tblentry SET uid='${list.uid}' , password='${list.pwd}' WHERE id='${list.id}'`
+        con.query(qry,(error,result)=>{
             if(error) throw error
             console.log("Updated");
             
+            
         })
+        res.redirect('/')
     }
     else{
         
@@ -44,10 +47,11 @@ app.post('/addData', (req, res) => {
         con.query(qry, (error) => {
             if (error) throw error
             console.log("Record Inserted");
-    
         })
+        res.redirect('/')
+        
+        
     }
-    res.redirect('/')
 })
 app.get('/deleteData', (req, res) => {
     const dId = req.query.delete

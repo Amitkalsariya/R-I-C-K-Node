@@ -87,6 +87,54 @@
         .form-footer a:hover {
             text-decoration: underline;
         }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        td button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        td button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Action buttons styling */
+        .action-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 
@@ -95,18 +143,19 @@
     <div class="form-container">
         <h2>Crud Form</h2>
         <form action="/addData" method="post">
+            <input type="hidden" name="eId" value="<%= (editResult) ? editResult.id : '' %>">
             <label for="uid">User Id</label>
             <input type="text" id="uid" name="uid" placeholder="Enter your User ID"
-                value="<%= (editResult)? editResult.uid :'' %>" required>
+                value="<%= (editResult) ? editResult.uid : '' %>" required>
 
             <label for="pwd">Password</label>
             <input type="password" id="pwd" name="pwd" placeholder="Enter your Password"
-                value="<%= (editResult)?editResult.password : '' %>" required>
+                value="<%= (editResult) ? editResult.password : '' %>" required>
 
             <button type="submit">Submit</button>
         </form>
-
     </div>
+
     <table border="1">
         <tr>
             <th>Id</th>
@@ -115,23 +164,15 @@
             <th>Delete</th>
             <th>Update</th>
         </tr>
-        <% result.map((el,i)=>{
-            %>
-            <tr>
-                <td>
-                    <%= el.id %>
-                </td>
-                <td>
-                    <%= el.uid %>
-                </td>
-                <td>
-                    <%= el.password %>
-                </td>
-                <td><button><a href="/deleteData?delete=<%= el.id %>">Delete</a></button></td>
-                <td><button><a href="/editData?edit=<%= el.id %>">Edit</a></button></td>
-
-            </tr>
-            <% }) %>
+        <% result.map((el, i) => { %>
+        <tr>
+            <td><%= el.id %></td>
+            <td><%= el.uid %></td>
+            <td><%= el.password %></td>
+            <td><a href="/deleteData?delete=<%= el.id %>" class="action-btn">Delete</a></td>
+            <td><a href="/editData?edit=<%= el.id %>" class="action-btn">Edit</a></td>
+        </tr>
+        <% }) %>
     </table>
 
 </body>
