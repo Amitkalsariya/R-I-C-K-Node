@@ -87,41 +87,41 @@
 
     <form action="/createData" method="post">
         <h2>Registration Form</h2>
-
+        <input type="hidden" name="id" value="<% (EditResult) ? EditResult.id : '' %>">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
+            <input type="text" name="name" id="name" value="<%= (EditResult) ? EditResult.name : '' %>" required>
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email"  value="<%= (EditResult) ? EditResult.email : '' %>" required>
         </div>
 
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password"  value="<%= (EditResult) ? EditResult.password : '' %>" required>
         </div>
 
         <div class="form-group">
             <label>Gender:</label>
-            <input type="radio" name="gender" value="male" id="male"> <label for="male">Male</label>
-            <input type="radio" name="gender" value="female" id="female"> <label for="female">Female</label>
+            <input type="radio" name="gender" value="male" <% if (EditResult && EditResult.gender === 'male') { %>checked<% } %> id="male"> <label for="male">Male</label>
+            <input type="radio"  name="gender" value="female" <% if (EditResult && EditResult.gender === 'female') { %>checked<% }%>  id="female"> <label for="female">Female</label>
         </div>
 
         <div class="hobbies-group">
-            <label><input type="checkbox" name="hobbies" value="dancing"> Dancing</label>
-            <label><input type="checkbox" name="hobbies" value="playing"> Playing</label>
-            <label><input type="checkbox" name="hobbies" value="writing"> Writing</label>
+            <label><input type="checkbox" name="hobbies" value="dancing" <% if (EditResult && EditResult.hobby.includes('dancing')) { %>checked<% } %>> Dancing</label>
+            <label><input type="checkbox" name="hobbies" value="playing" <% if (EditResult && EditResult.hobby.includes('playing')) { %>checked<% } %>> Playing</label>
+            <label><input type="checkbox" name="hobbies" value="writing" <% if (EditResult && EditResult.hobby.includes('writing')) { %>checked<% } %>> Writing</label>
         </div>
 
         <div class="form-group">
             <label for="city">City:</label>
             <select name="city" id="city" required>
                 <option value="">--Select Your City--</option>
-                <option value="surat">Surat</option>
-                <option value="vadodara">Vadodara</option>
-                <option value="junagadh">Junagadh</option>
+                <option value="surat" <% if (EditResult && EditResult.city === 'surat') { %>selected<% }%>>Surat</option>
+                <option value="vadodara" <% if (EditResult && EditResult.city === 'vadodara') { %>selected<% }%>>Vadodara</option>
+                <option value="junagadh" <% if (EditResult && EditResult.city === 'junagadh') { %>selected<% }%>>Junagadh</option>
             </select>
         </div>
 
@@ -137,6 +137,7 @@
             <th>Hobbies</th>
             <th>City</th>
             <th>Delete</th>
+            <th>Edit</th>
         </tr>
         <%
             result.map((el,i)=>{
@@ -147,9 +148,10 @@
                     <td><%= el.email%></td>
                     <td><%= el.password%></td>
                     <td><%= el.gender%></td>
-                    <td><%= el.hobbies%></td>
+                    <td><%= el.hobby%></td>
                     <td><%= el.city%></td>
-                    <td><button><a hresf="/deleteData?delete=<%= el.id %>">Delete</a></button></td>
+                    <td><button><a href="/deleteData?delete=<%= el.id %>">Delete</a></button></td>
+                    <td><button><a href="/editData?edit=<%= el.id %>">Edit</a></button></td>
                 </tr>
         <%  
         })
