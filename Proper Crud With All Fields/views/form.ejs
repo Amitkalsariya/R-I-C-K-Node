@@ -3,37 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Styled Form</title>
+    <title>Styled Registration Form</title>
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
-            width: 100%;
+            background-color: #f9f9f9;
         }
 
         h2 {
             text-align: center;
             margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Form Styling */
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
         }
 
         label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 5px;
             display: block;
-            margin: 10px 0 5px;
-            font-weight: bold;
         }
 
         input[type="text"],
@@ -41,121 +49,202 @@
         input[type="password"],
         select {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
 
         input[type="radio"],
         input[type="checkbox"] {
-            margin: 0 5px 0 0;
+            margin: 0 8px 0 0;
         }
 
-        .form-group {
-            margin-bottom: 15px;
+        .gender-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .hobbies-group {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
+            gap: 10px;
         }
 
         .hobbies-group label {
             flex: 1;
-            padding: 0 10px;
+            padding: 5px 0;
         }
 
         input[type="submit"] {
             background-color: #28a745;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px;
             width: 100%;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s ease;
         }
 
         input[type="submit"]:hover {
             background-color: #218838;
         }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: 600;
+        }
+
+        td {
+            background-color: #fff;
+            color: #555;
+        }
+
+        td a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        td a:hover {
+            text-decoration: underline;
+        }
+
+        .action-buttons a {
+            margin: 0 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .action-buttons a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            table {
+                font-size: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Registration Form -->
     <form action="/createData" method="post">
         <h2>Registration Form</h2>
-        <input type="hidden" name="id" value="<% (EditResult) ? EditResult.id : '' %>">
+        <input type="hidden" name="id" value="<%= (EditResult) ? EditResult.id : '' %>">
+        
+        <!-- Name Field -->
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" name="name" id="name" value="<%= (EditResult) ? EditResult.name : '' %>" required>
         </div>
 
+        <!-- Email Field -->
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email"  value="<%= (EditResult) ? EditResult.email : '' %>" required>
+            <input type="email" name="email" id="email" value="<%= (EditResult) ? EditResult.email : '' %>" required>
         </div>
 
+        <!-- Password Field -->
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password"  value="<%= (EditResult) ? EditResult.password : '' %>" required>
+            <input type="password" name="password" id="password" value="<%= (EditResult) ? EditResult.password : '' %>" required>
         </div>
 
-        <div class="form-group">
+        <!-- Gender Selection -->
+        <div class="form-group gender-group">
             <label>Gender:</label>
             <input type="radio" name="gender" value="male" <% if (EditResult && EditResult.gender === 'male') { %>checked<% } %> id="male"> <label for="male">Male</label>
-            <input type="radio"  name="gender" value="female" <% if (EditResult && EditResult.gender === 'female') { %>checked<% }%>  id="female"> <label for="female">Female</label>
+            <input type="radio" name="gender" value="female" <% if (EditResult && EditResult.gender === 'female') { %>checked<% } %> id="female"> <label for="female">Female</label>
         </div>
 
-        <div class="hobbies-group">
+        <!-- Hobbies Selection -->
+        <div class="form-group hobbies-group">
             <label><input type="checkbox" name="hobbies" value="dancing" <% if (EditResult && EditResult.hobby.includes('dancing')) { %>checked<% } %>> Dancing</label>
             <label><input type="checkbox" name="hobbies" value="playing" <% if (EditResult && EditResult.hobby.includes('playing')) { %>checked<% } %>> Playing</label>
             <label><input type="checkbox" name="hobbies" value="writing" <% if (EditResult && EditResult.hobby.includes('writing')) { %>checked<% } %>> Writing</label>
         </div>
 
+        <!-- City Selection -->
         <div class="form-group">
             <label for="city">City:</label>
             <select name="city" id="city" required>
                 <option value="">--Select Your City--</option>
-                <option value="surat" <% if (EditResult && EditResult.city === 'surat') { %>selected<% }%>>Surat</option>
-                <option value="vadodara" <% if (EditResult && EditResult.city === 'vadodara') { %>selected<% }%>>Vadodara</option>
-                <option value="junagadh" <% if (EditResult && EditResult.city === 'junagadh') { %>selected<% }%>>Junagadh</option>
+                <option value="surat" <% if (EditResult && EditResult.city === 'surat') { %>selected<% } %>>Surat</option>
+                <option value="vadodara" <% if (EditResult && EditResult.city === 'vadodara') { %>selected<% } %>>Vadodara</option>
+                <option value="junagadh" <% if (EditResult && EditResult.city === 'junagadh') { %>selected<% } %>>Junagadh</option>
             </select>
         </div>
 
         <input type="submit" value="Submit">
     </form>
+
+    <!-- Data Table -->
     <table>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Password</th>
-            <th>Gender</th>
-            <th>Hobbies</th>
-            <th>City</th>
-            <th>Delete</th>
-            <th>Edit</th>
-        </tr>
-        <%
-            result.map((el,i)=>{
-        %>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Gender</th>
+                <th>Hobbies</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%
+                result.map((el, i) => {
+            %>
                 <tr>
                     <td><%= el.id %></td>
-                    <td><%= el.name%></td>
-                    <td><%= el.email%></td>
-                    <td><%= el.password%></td>
-                    <td><%= el.gender%></td>
-                    <td><%= el.hobby%></td>
-                    <td><%= el.city%></td>
-                    <td><button><a href="/deleteData?delete=<%= el.id %>">Delete</a></button></td>
-                    <td><button><a href="/editData?edit=<%= el.id %>">Edit</a></button></td>
+                    <td><%= el.name %></td>
+                    <td><%= el.email %></td>
+                    <td><%= el.password %></td>
+                    <td><%= el.gender %></td>
+                    <td><%= el.hobby %></td>
+                    <td><%= el.city %></td>
+                    <td class="action-buttons">
+                        <a href="/deleteData?delete=<%= el.id %>" class="btn-delete">Delete</a>
+                        <a href="/editData?edit=<%= el.id %>" class="btn-edit">Edit</a>
+                    </td>
                 </tr>
-        <%  
-        })
-        %>
+            <%  
+                });
+            %>
+        </tbody>
     </table>
+
 </body>
 </html>
