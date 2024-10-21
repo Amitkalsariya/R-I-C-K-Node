@@ -1,19 +1,43 @@
-const express=require('express')
+const bodyParser = require('body-parser')
+const express = require('express')
 const { Long } = require('mongodb')
-const app=express()
-const url='mongodb://localhost:27017'
-const MongoClient=require('mongodb').MongoClient
-const Client= new MongoClient(url)
+const app = express()
+const url = 'mongodb://localhost:27017'
+app.use(bodyParser.urlencoded({ extended: true }))
+const MongoClient = require('mongodb').MongoClient
+const ObjectId=require('mongodb').ObjectId
+const Client = new MongoClient(url)
 Client.connect(url)
-.then(()=>{
-    console.log("Connected To Server");
-    
+    .then(() => {
+        console.log("Connected To Server");
+
+    })
+    .catch((error) => {
+        console.log(error);
+
+    })
+app.set('view engine', 'ejs')
+const db=Client.db('Db_testing')
+const collection=db.collection('rick')
+app.get('/', async(req, res) => {
+    const data= await collection.find().toArray()
+    res.render('form',{data})
 })
-.catch((error)=>{
-    console.log(error);
-    
+app.post('/createData', async (req, res) => {
+     await collection.insertOne(req.body)
+     res.redirect('/')
 })
-app.listen(1304,()=>{
+app.get('/deleteData',async (req,res)=>{
+    const dId=req.query.delete
+    await collection.deleteOne({_id: new ObjectId(dId)})    
+    res.redirect('/')
+})
+app.get('/updateData', async(req,res)=>{
+    // const eId=req.query.edit
+    //  await collection.findOne({_id: new ObjectId(eId)})
+     res.redirect('/')
+})
+app.listen(1304, () => {
     console.log("You Are on 1304");
-    
+
 })

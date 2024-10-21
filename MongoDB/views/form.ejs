@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form and Table</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        /* Container for form and table */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        form input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            flex: 1;
+            max-width: 250px;
+        }
+
+        form input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f2f2f2;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Button styling inside table */
+        button {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Responsive styling for small screens */
+        @media (max-width: 768px) {
+            form {
+                flex-direction: column;
+            }
+
+            form input[type="text"], form input[type="submit"] {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Form for data input -->
+    <form action="/createData" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Enter Name" required>
+        
+        <label for="sname">Surname:</label>
+        <input type="text" name="sname" id="sname" placeholder="Enter Surname" required>
+        
+        <label for="div">Div:</label>
+        <input type="text" name="div" id="div" placeholder="Enter Division" required>
+        
+        <input type="submit" value="Add Data">
+    </form>
+
+    <!-- Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Div</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.map((el, i) => { %>
+            <tr>
+                <td><%= i + 1 %></td>
+                <td><%= el.name %></td>
+                <td><%= el.sname %></td>
+                <td><%= el.div %></td>
+                <td>
+                    <button><a href="/deleteData?delete=<%= el._id %>">Delete</a></button>
+                    <button><a href="/updateData?edit=<%= el._id %>">Update</a></button>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
