@@ -1,0 +1,19 @@
+<form action="cData" method="post">
+    Name :- <input  name="name" type="text">
+    Sname :- <input type="text" name="sname">
+    <input type="submit">
+</form>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Surname</td>
+    </tr>
+    <% data.map((el,i)=>{%>
+        <tr>
+            <td><%= el.name %></td>
+            <td><%= el.sname %></td>
+            <td><button><a href="dData?delete=<%= el._id %>">Delete</a></button></td>
+        </tr>
+    <%})%>
+
+</table>

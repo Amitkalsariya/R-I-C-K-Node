@@ -33,7 +33,7 @@ app.get('/deleteData',async (req,res)=>{
     res.redirect('/')
 })
 app.get('/updateData', async(req,res)=>{
-    // const eId=req.query.edit
+    // const eId=req.query.edit 
     //  await collection.findOne({_id: new ObjectId(eId)})
      res.redirect('/')
 })
