@@ -24,7 +24,20 @@ app.get('/', async(req, res) => {
     res.render('form',{data})
 })
 app.post('/createData', async (req, res) => {
-     await collection.insertOne(req.body)
+    const {id,name,sname,div}=req.body
+    if(id)
+    {
+        
+        await collection.updateOne(
+        { _id: new ObjectId(id) },
+        {$set:{name,sname,div} }
+        )
+    }
+    else
+    {
+
+        await collection.insertOne(req.body)
+    }
      res.redirect('/')
 })
 app.get('/deleteData',async (req,res)=>{
@@ -33,11 +46,12 @@ app.get('/deleteData',async (req,res)=>{
     res.redirect('/')
 })
 app.get('/updateData', async(req,res)=>{
-    // const eId=req.query.edit 
-    //  await collection.findOne({_id: new ObjectId(eId)})
-     res.redirect('/')
+     const eId=req.query.edit 
+     const formData = await collection.findOne({_id: new ObjectId(eId)})
+     const data=await collection.find().toArray()
+     res.render('form',{data,formData})
 })
 app.listen(1304, () => {
     console.log("You Are on 1304");
-
+                                                           
 })

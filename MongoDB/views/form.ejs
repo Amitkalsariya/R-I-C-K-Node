@@ -117,13 +117,13 @@
     <!-- Form for data input -->
     <form action="/createData" method="post">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" placeholder="Enter Name" required>
+        <input type="text" name="name" id="name"  value="<%= (formData)?formData.name:'' %>" placeholder="Enter Name" required>
         
         <label for="sname">Surname:</label>
-        <input type="text" name="sname" id="sname" placeholder="Enter Surname" required>
+        <input type="text" name="sname" id="sname"   value="<%= (formData)?formData.sname:'' %>" placeholder="Enter Surname" required>
         
-        <label for="div">Div:</label>
-        <input type="text" name="div" id="div" placeholder="Enter Division" required>
+        <label for="div">Di v:</label>
+        <input type="text" name="div" id="div"   value="<%= (formData)?formData.div:'' %>" placeholder="Enter Division" required>
         
         <input type="submit" value="Add Data">
     </form>
@@ -150,7 +150,7 @@
                     <button><a href="/deleteData?delete=<%= el._id %>">Delete</a></button>
                     <button><a href="/updateData?edit=<%= el._id %>">Update</a></button>
                 </td>
-            </tr>
+            </tr>   
             <% }) %>
         </tbody>
     </table>
