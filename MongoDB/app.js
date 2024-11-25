@@ -26,6 +26,7 @@ app.get('/', async(req, res) => {
 app.post('/createData', async (req, res) => {
     const {id,name,sname,div}=req.body
     if(id)
+        
     {
         
         await collection.updateOne(
