@@ -23,6 +23,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/blog', blogRouter);
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://127.0.0.1:27017/first_demo')
+  .then(() => console.log('Connected!'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
