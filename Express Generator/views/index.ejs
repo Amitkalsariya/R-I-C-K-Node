@@ -13,5 +13,21 @@
       <input type="text" name="password">
         <button>Submit</button>
     </form>
+    <table border="2" cellpadding="5">
+      <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Password</th>
+      </tr>
+      <% data.map((el,i)=>{ %>
+        <tr>
+            <td><%= el.name %></td>
+            <td><%= el.sname %></td>
+            <td><%= el.password %></td>
+        </tr>
+
+      <%
+      })%>
+    </table>
   </body>
 </html>
