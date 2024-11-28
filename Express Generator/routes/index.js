@@ -11,6 +11,11 @@ router.get('/', async(req, res, next)=> {
   await USER.create(req.body)
   res.redirect('/')
  })
- 
+ router.get('/deleteData' ,async(req,res)=>{
+  const dId=req.query.delete
+  await USER.findByIdAndDelete(dId)
+  res.redirect('/')
+ })
 module.exports = router;
- 
+                       
+

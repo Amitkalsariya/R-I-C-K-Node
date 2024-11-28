@@ -18,13 +18,17 @@
         <th>Name</th>
         <th>Surname</th>
         <th>Password</th>
+        <th>Delete</th>
       </tr>
       <% data.map((el,i)=>{ %>
         <tr>
             <td><%= el.name %></td>
             <td><%= el.sname %></td>
             <td><%= el.password %></td>
+            <td><a href="/deleteData?delete=<%= el._id %>">Delete</a></td>
+            <td><a href="/updataeData?delete=<%= el._id %>">Delete</a></td>
         </tr>
+        
 
       <%
       })%>
