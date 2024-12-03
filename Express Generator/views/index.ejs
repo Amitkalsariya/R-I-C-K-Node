@@ -44,6 +44,15 @@
         font-size: 16px;
       }
 
+
+      input[type="password"] {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
       button {
         padding: 10px;
         background-color: #4CAF50;
@@ -100,18 +109,18 @@
 
     <!-- Form for Adding or Updating Users -->
     <form action="/add" method="post">
-      <input type="hidden" name="id" value="<%= (updateData) ? updateData._id : '' %>">
+      <input type="hidden" name="id" value="<%= updateData._id %>">
 
       <label for="name">Name</label>
-      <input type="text" name="name" value="<%= (updateData) ? updateData.name : '' %>" id="name" required>
+      <input type="text" name="name" value="<%= updateData.name %>" id="name" required>
 
       <label for="sname">Surname</label>
-      <input type="text" name="sname" value="<%= (updateData) ? updateData.sname : '' %>" id="sname" required>
+      <input type="text" name="sname" value="<%= updateData.sname %>" id="sname" required>
 
       <label for="password">Password</label>
-      <input type="text" name="password" value="<%= (updateData) ? updateData.password : '' %>" id="password" required>
+      <input type="password" name="password" value="<%= updateData.password %>" id="password" required>
 
-      <button type="submit"><%= (updateData) ? 'Update' : 'Submit' %></button>
+      <button type="submit"><%= (updateData._id) ? 'Update' : 'Submit' %></button>
     </form>
 
     <!-- Table to display all users -->
@@ -132,7 +141,7 @@
             <td><%= el.sname %></td>
             <td><%= el.password %></td>
             <td><a href="/deleteData?delete=<%= el._id %>">Delete</a></td>
-            <td><a href="/updateData?update=<%= el._id %>">Update</a></td>
+            <td><a href="/updateData/<%= el._id %>">Update</a></td>
           </tr>
         <% }) %>
       </tbody>
