@@ -140,8 +140,8 @@
             <td><%= el.name %></td>
             <td><%= el.sname %></td>
             <td><%= el.password %></td>
-            <td><a href="/deleteData?delete=<%= el._id %>">Delete</a></td>
-            <td><a href="/updateData/<%= el._id %>">Update</a></td>
+            <td><a href="/deleteData?delete=<%= el._id %>"><button>Delete</button></a></td>
+            <td><a href="/updateData/<%= el._id %>"><button>Update</button></a></td>
           </tr>
         <% }) %>
       </tbody>

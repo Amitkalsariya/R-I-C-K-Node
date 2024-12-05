@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const   USER=require('../Models/user');
-const { response } = require('../app');
-const { options } = require('./users');
 /* GET home page. */
 router.get('/', async(req, res, next)=> {
+
+
   // This is For Name Wise sorting Asscending Order
   // const data=await USER.find().sort({name:-1})
 
@@ -41,6 +41,8 @@ router.get('/', async(req, res, next)=> {
   res.render('index', {data , updateData : {} });
 });
  router.post ('/add',async (req,res)=>{
+
+  // This is Another Method Of If condition
   // console.log(req.body);
   // const {id} = req.body; 
   // console.log(id);
@@ -54,6 +56,8 @@ router.get('/', async(req, res, next)=> {
   // {
 
   // }
+
+
   if(req.body.id)
     {
       await USER.findByIdAndUpdate(req.body.id, req.body)  
