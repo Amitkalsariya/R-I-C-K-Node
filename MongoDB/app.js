@@ -35,6 +35,8 @@ app.post('/createData', async (req, res) => {
         )
     }
     else
+
+    
     {
 
         await collection.insertOne(req.body)

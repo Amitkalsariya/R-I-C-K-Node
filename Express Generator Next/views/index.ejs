@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      /* Basic page styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 30px;
+        color: #333;
+      }
+
+      /* Form styling */
+      form {
+        background-color: #fff;
+        padding: 20px;
+        margin: 20px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+
+      input[type="password"] {
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      /* Table styling */
+      table {
+        width: 80%;
+        margin-top: 30px;
+        border-collapse: collapse;
+      }
+
+      table th, table td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid #ddd;
+      }
+
+      table th {
+        background-color: #4CAF50;
+        color: white;
+      }
+
+      table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      table tr:hover {
+        background-color: #ddd;
+      }
+
+      a {
+        text-decoration: none;
+        color: #007BFF;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>User Management</h1>
+
+    <!-- Form for Adding or Updating Users -->
+    <form action="/add" method="post">
+      <input type="hidden" name="id" value="<%= updateData._id %>">
+
+      <label for="name">Name</label>
+      <input type="text" name="name" value="<%= updateData.name %>" id="name" required>
+
+      <label for="sname">Surname</label>
+      <input type="text" name="sname" value="<%= updateData.sname %>" id="sname" required>
+
+      <label for="password">Password</label>
+      <input type="password" name="password" value="<%= updateData.password %>" id="password" required>
+
+      <button type="submit"><%= (updateData._id) ? 'Update' : 'Submit' %></button>
+    </form>
+
+    <!-- Table to display all users -->
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Password</th>
+          <th>Delete</th>
+          <th>Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.map((el) => { %>
+          <tr>
+            <td><%= el.name %></td>
+            <td><%= el.sname %></td>
+            <td><%= el.password %></td>
+            <td><a href="/deleteData?delete=<%= el._id %>"><button>Delete</button></a></td>
+            <td><a href="/updateData/<%= el._id %>"><button>Update</button></a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </body>
+</html>
