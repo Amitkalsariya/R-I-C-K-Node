@@ -1,12 +1,10 @@
-const { default: mongoose } = require("mongoose");
-
-
+const mongoose=require('mongoose')
 const Schema = mongoose.Schema;
 
 
-const Api = new Schema({
-  name: String,
-  id: String,
-  password: String
+const Stud = new Schema({
+ id:String,
+ password:String
 });
-module.exports = mongoose.model('user', Api);
+
+module.exports = mongoose.model('user', Stud);

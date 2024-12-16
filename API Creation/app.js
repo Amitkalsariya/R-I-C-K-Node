@@ -23,9 +23,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/api_create')
+mongoose.connect('mongodb://127.0.0.1:27017/api-test')
   .then(() => console.log('Connected!'));
-// catch 404 and forward to error handlernp
+// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
