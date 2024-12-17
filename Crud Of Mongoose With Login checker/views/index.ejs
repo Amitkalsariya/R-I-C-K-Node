@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Management</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <style>
+    /* Basic page styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e6f7ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 30px;
+      color: #005f73;
+      font-weight: 600;
+    }
+
+    /* Form styling */
+    form {
+      background-color: #ffffff;
+      padding: 25px;
+      margin: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 450px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ddd;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #005f73;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      padding: 12px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #005f73;
+      box-shadow: 0 0 5px rgba(0, 95, 115, 0.5);
+    }
+
+    button {
+      padding: 12px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005f73;
+    }
+
+    .login-link {
+      text-decoration: none;
+      color: #008CBA;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 6px;
+      display: inline-block;
+      text-align: center;
+      border: 1px solid #008CBA;
+      margin-top: 10px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .login-link:hover {
+      background-color: #008CBA;
+      color: white;
+    }
+
+    /* Table styling */
+    table {
+      width: 90%;
+      max-width: 1000px;
+      margin-top: 30px;
+      border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #005f73;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background-color: #f0f8ff;
+    }
+
+    table tr:hover {
+      background-color: #d1e6f2;
+    }
+
+    a {
+      text-decoration: none;
+      color: #008CBA;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      table {
+        width: 100%;
+      }
+
+      form {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      form {
+        width: 100%;
+      }
+
+      button {
+        font-size: 14px;
+        padding: 10px;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        font-size: 14px;
+        padding: 10px;
+      }
+    }
+    /* Button Styling */
+button {
+  padding: 12px;
+  background: linear-gradient(135deg, #008CBA, #005f73);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #005f73, #008CBA);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+  border: 2px solid #005f73;
+}
+
+/* Optional icon addition to button */
+button .icon {
+  margin-right: 8px;
+}
+
+/* Adjustments for delete and update buttons */
+button.delete {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  transition: all 0.3s ease;
+}
+
+button.delete:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+}
+
+button.update {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  transition: all 0.3s ease;
+}
+
+button.update:hover {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+  </style>
+</head>
+
+<body>
+
+  <h1>User Management</h1>
+
+  <!-- Form for Adding or Updating Users -->
+  <form action="/add" method="post">
+    <input type="hidden" name="id" value="<%= updateData._id %>">
+
+    <label for="name">Name</label>
+    <input type="text" name="name" value="<%= updateData.name %>" id="name" required>
+
+    <label for="email">Email</label>
+    <input type="text" name="email" value="<%= updateData.email %>" id="email" required>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" value="" id="password">
+
+    <button type="submit">
+      <%= (updateData._id) ? 'Update' : 'Sign Up' %>
+    </button><br>
+
+    <a href="login" class="login-link">Login</a>
+  </form>
+
+  <!-- Table to display all users -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>Delete</th>
+        <th>Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.map((el) => { %>
+        <tr>
+          <td><%= el.name %></td>
+          <td><%= el.email %></td>
+          <td><%= el.password %></td>
+          <td><a href="/deleteData?delete=<%= el._id %>"><button>Delete</button></a></td>
+          <td><a href="/updateData/<%= el._id %>"><button>Update</button></a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</body>
+
+</html>

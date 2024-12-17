@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #e6f7ff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        color: #004d73;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      label {
+        font-size: 14px;
+        color: #004d73;
+        font-weight: 500;
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="password"]:focus {
+        border-color: #004d73;
+        box-shadow: 0 0 5px rgba(0, 77, 115, 0.3);
+      }
+
+      button {
+        padding: 12px;
+        background-color: #004d73;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #003f61;
+      }
+
+      a {
+        text-decoration: none;
+        color: #004d73;
+        margin-top: 10px;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+      /* Button Styling */
+button {
+  padding: 12px;
+  background: linear-gradient(135deg, #008CBA, #005f73);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #005f73, #008CBA);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+  border: 2px solid #005f73;
+}
+
+/* Optional icon addition to button */
+button .icon {
+  margin-right: 8px;
+}
+
+/* Adjustments for delete and update buttons */
+button.delete {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  transition: all 0.3s ease;
+}
+
+button.delete:hover {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+}
+
+button.update {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  transition: all 0.3s ease;
+}
+
+button.update:hover {
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+    </style>
+  </head>
+  <body>
+
+    <h1>Login</h1>
+
+    <form action="/login" method="post">
+      <label for="email">Email</label>
+      <input type="text" name="email" id="email" required>
+    
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+    
+      <button type="submit">Login</button>
+    
+      <!-- Sign Up link -->
+      <a href="/signup">Don't have an account? Sign Up</a>
+    </form>
+
+  </body>
+</html>
