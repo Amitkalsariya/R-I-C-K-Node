@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const USER=require('../Models/user')
-const allcontroller=require('../controllers/user')
+const USER = require('../Models/user')
+const allcontroller = require('../controllers/user')
 /* GET home page. */
 // router.get('/', async (req, res, next) =>{
 // try {
@@ -14,16 +14,16 @@ const allcontroller=require('../controllers/user')
 //     res.status(404).json({
 //       status:"Fail to Load",
 //       error:err
-      
+
 
 //     })
 
 // }
-  
+
 // });
 
-router.get('/stud',allcontroller.Allstud );
-  
-  router.post('/stud/studadd', allcontroller.AddStud);
-    router.get('/stud/login', allcontroller.Loginstud);
+router.get('/stud', allcontroller.SECURE, allcontroller.Allstud);
+
+router.post('/stud/studadd', allcontroller.AddStud);
+router.post('/stud/login', allcontroller.Loginstud);
 module.exports = router;
