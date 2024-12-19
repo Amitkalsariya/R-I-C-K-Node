@@ -17,6 +17,7 @@
 //     }
 //     next()
 
+
 //   }
 //   catch (err) {
 //     res.status(404).json({
@@ -187,6 +188,8 @@ exports.Loginstud = async (req, res, next) => {
 
     const checkid = await USER.findOne({ id: req.body.id });
     if (!checkid) {
+
+      
       throw new Error("Id is Not Found");
     }
 
