@@ -161,9 +161,13 @@ exports.AddStud = async (req, res, next) => {
     if (!req.body.id || !req.body.password) {
       throw new Error("Please Enter Valid Information");
     }
+    
+
+    req.body.P_image=req.file.filename
 
     req.body.password = bcrypt.hashSync(req.body.password, 10);
-    const addstud = await USER.create(req.body);
+    console.log(req.body)
+        const addstud = await USER.create(req.body);
     // console.log(allStud);
 
     res.status(200).json({
@@ -208,6 +212,7 @@ exports.Loginstud = async (req, res, next) => {
       data: checkid,
      token
     });
+    
   } catch (err) {
     res.status(404).json({
       status: "Fail to Load",

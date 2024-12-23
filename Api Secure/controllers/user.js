@@ -44,12 +44,14 @@ exports.getUsers = async (req, res, next) => {
 
 exports.SignUp = async (req, res, next) => {
     try {
-        console.log("data::", req.body)
+        console.log("data::", req.file)
 
         if (!req.body.name || !req.body.email || !req.body.password) {
             throw new Error("Please enter valid fields")
         }
+        req.body.profileImage = req.file.filename
         req.body.password = bcrypt.hashSync(req.body.password, 10)
+        console.log(req.body, req.file)
         const newuser = await USER.create(req.body)
 
         res.status(200).json({

@@ -17,6 +17,7 @@ const Menual1 = new Schema({
   password:{
     type: String,
     required: true
-  }
+  },
+  profileImage: String
 });
 module.exports = mongoose.model('user', Menual1); 

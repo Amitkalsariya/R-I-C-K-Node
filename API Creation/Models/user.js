@@ -11,7 +11,8 @@ const Stud = new Schema({
  password:{
     type:String,
     required:true
- }
+ },
+ P_image:String
 });
 
 module.exports = mongoose.model('user', Stud);
