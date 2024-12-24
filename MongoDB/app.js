@@ -1,60 +1,75 @@
-const bodyParser = require('body-parser')
-const express = require('express')
-const { Long } = require('mongodb')
-const app = express()
-const url = 'mongodb://localhost:27017'
-app.use(bodyParser.urlencoded({ extended: true }))
-const MongoClient = require('mongodb').MongoClient
-const ObjectId=require('mongodb').ObjectId
-const Client = new MongoClient(url)
+const express = require('express');
+const { MongoClient, ObjectId } = require('mongodb');
+const app = express();
+
+const url = 'mongodb://localhost:27017';
+const Client = new MongoClient(url);
+
+app.use(express.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+
 Client.connect(url)
     .then(() => {
-        console.log("Connected To Server");
-
+        console.log("Connected to MongoDB server");
     })
     .catch((error) => {
         console.log(error);
+    });
 
-    })
-app.set('view engine', 'ejs')
-const db=Client.db('Db_testing')
-const collection=db.collection('rick')
-app.get('/', async(req, res) => {
-    const data= await collection.find().toArray()
-    res.render('form',{data})
-})
+const db = Client.db('Db_testing');
+const collection = db.collection('rick');
+
+app.get('/', async (req, res) => {
+    try {
+        const data = await collection.find().toArray();
+        res.render('form', { data });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.post('/createData', async (req, res) => {
-    const {id,name,sname,div}=req.body
-    if(id)
-        
-    {
-        
-        await collection.updateOne(
-        { _id: new ObjectId(id) },
-        {$set:{name,sname,div} }
-        )
+    const { id, name, sname, div } = req.body;
+    try {
+        if (id) {
+            await collection.updateOne(
+                { _id: new ObjectId(id) },
+                { $set: { name, sname, div } }
+            );
+        } else {
+            await collection.insertOne(req.body);
+        }
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-    else
+});
 
-    
-    {
-
-        await collection.insertOne(req.body)
+app.get('/deleteData', async (req, res) => {
+    const dId = req.query.delete;
+    try {
+        await collection.deleteOne({ _id: new ObjectId(dId) });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
-     res.redirect('/')
-})
-app.get('/deleteData',async (req,res)=>{
-    const dId=req.query.delete
-    await collection.deleteOne({_id: new ObjectId(dId)})    
-    res.redirect('/')
-})
-app.get('/updateData', async(req,res)=>{
-     const eId=req.query.edit 
-     const formData = await collection.findOne({_id: new ObjectId(eId)})
-     const data=await collection.find().toArray()
-     res.render('form',{data,formData})
-})
+});
+
+app.get('/updateData', async (req, res) => {
+    const eId = req.query.edit;
+    try {
+        const formData = await collection.findOne({ _id: new ObjectId(eId) });
+        const data = await collection.find().toArray();
+        res.render('form', { data, formData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 app.listen(1304, () => {
-    console.log("You Are on 1304");
-                                                           
-})
+    console.log("Server running on port 1304");
+});
