@@ -9,6 +9,9 @@ const Admin = new Schema({
   apin:{
     type:String,
     required:true
+  },
+  aimage:{
+    type:Array
   }
 
 });
