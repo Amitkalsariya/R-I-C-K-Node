@@ -51,9 +51,18 @@ exports.Admin_signup = async function (req, res) {
 
     // req.body.aimage = fileNames;
 
-    const mulitfiles=req.files.map(file=>file.filename);
-    console.log("Uploaded Feilds File Names:",mulitfiles);
-    req.body.aimage=mulitfiles;
+    // const mulitfiles=req.files.map(file=>file.filename);
+    // console.log("Uploaded Feilds File Names:",mulitfiles);
+    // req.body.aimage=mulitfiles;
+
+  // This is For Feilds Method Of Multer
+
+  const fileNames = req.files['admin_image'] ? req.files['admin_image'].map(file => file.filename) : [];
+  console.log("Uploaded File Names:", fileNames);
+
+  // Add the filenames of uploaded images to the request body
+  req.body.aimage = fileNames;
+  
     req.body.apin = bcrypt.hashSync(req.body.apin, 10)
 
     const add_admin = await ADMIN.create(req.body);
