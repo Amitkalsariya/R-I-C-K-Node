@@ -38,7 +38,7 @@ exports.Alladmin = async function (req, res) {
 }
 exports.Admin_signup = async function (req, res) {
   try {
-    console.log(req.body);
+    console.log(req.files);
     if (!req.body.aid || !req.body.apin) {
       throw new Error("Please Provide Admin ID and Admin Pin");
     }
@@ -58,11 +58,14 @@ exports.Admin_signup = async function (req, res) {
   // This is For Feilds Method Of Multer
 
   const fileNames = req.files['admin_image'] ? req.files['admin_image'].map(file => file.filename) : [];
+  const documentFileNames = req.files['document'] ? req.files['document'].map(file => file.filename) : [];
+  const profile_picture = req.files['profile_picture'] ? req.files['profile_picture'][0].filename : null;
   console.log("Uploaded File Names:", fileNames);
 
   // Add the filenames of uploaded images to the request body
   req.body.aimage = fileNames;
-  
+  req.body.picture=profile_picture;
+  req.body.document=documentFileNames;
     req.body.apin = bcrypt.hashSync(req.body.apin, 10)
 
     const add_admin = await ADMIN.create(req.body);

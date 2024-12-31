@@ -10,9 +10,8 @@ const Admin = new Schema({
     type:String,
     required:true
   },
-  aimage:{
-    type:Array
-  }
-
+  aimage:[String],
+  picture: String,
+  document:[String]
 });
 module.exports=mongoose.model('user',Admin);
