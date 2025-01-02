@@ -17,7 +17,9 @@ exports.Alladmin=async function(req, res, next) {
 }
 exports.New_admin=async function(req, res, next) {
     try {
-      
+      if(!req.body.aid || !req.body.apass || !req.body.fname || !req.body.lname || !req.body.email){
+      throw new Error ("Please enter Your All Details For Admin Data")
+      }
       const newadmin =await ADMIN.create(req.body)
       res.status(200).json({
         status:"Success For Add New Admin",
@@ -27,6 +29,25 @@ exports.New_admin=async function(req, res, next) {
     } catch (error) {
       res.status(404).json({
         status:"Failed To Create The Admin",
+        error:error.message
+      })
+    }
+  }
+  exports.Delete_admin=async function(req, res, next) {
+    try {
+      const{aid}=req.params
+      const checkadmin=await ADMIN.findById(aid)
+      if(!checkadmin){
+        throw new Error("Admin Not Found") 
+      }
+      const deleteadmin=await  ADMIN.findByIdAndDelete(checkadmin)
+      res.status(202).json({
+        status:"Admin Deleted Successfully",
+        data:deleteadmin
+      })
+    } catch (error) {
+      res.status(404).json({
+        status:"Failed To Delete The Admin",
         error:error.message
       })
     }

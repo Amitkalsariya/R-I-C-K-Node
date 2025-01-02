@@ -1,17 +1,13 @@
 
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
-const admin = new Schema({
-  aid: {
-    type: String,
-    unique: true,
-    required:true
-  },
-  apass: {
+const user = new Schema({
+  
+  fname: {
     type :String,
     required:true
   },
-  fname: {
+  mname:  {
     type :String,
     required:true
   },
@@ -22,6 +18,19 @@ const admin = new Schema({
   email: {
     type: String,
     unique: true
+  },
+  password: {
+    type :String,
+    required:true
+  },
+  dob: {
+    type :String,
+    required:true
+},
+  phone:{
+    type:String,
+    required:true
   }
+
 });
-module.exports = mongoose.model('user1', admin);
+module.exports = mongoose.model('user2', user);
