@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1:27017/Context_Book')
+mongoose.connect('mongodb://127.0.0.1:27017/Contact_Book')
   .then(() => console.log('Connected!'));
 
 app.use('/', indexRouter);

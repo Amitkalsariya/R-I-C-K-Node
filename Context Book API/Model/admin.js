@@ -24,4 +24,4 @@ const admin = new Schema({
     unique: true
   }
 });
-module.exports = mongoose.model('user1', admin);
+module.exports = mongoose.model('administrator', admin);

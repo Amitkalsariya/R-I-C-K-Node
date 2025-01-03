@@ -52,3 +52,24 @@ exports.New_admin=async function(req, res, next) {
       })
     }
   }
+  exports.Update_admin=async function(req, res, next) {
+    try {
+      const {aid} =req.params
+      if(!req.body.apass || !req.body.fname || !req.body.lname || !req.body.email){
+        throw new Error("Please Enter Your All Details For Admin Data")
+      }
+      const updateadmin=await ADMIN.findByIdAndUpdate(aid,req.body)
+      if(!updateadmin){
+        throw new Error("Admin aid Not Found")
+      }
+      res.status(202).json({
+        status:"Admin Updated Successfully",
+        data:updateadmin
+      })
+    } catch (error) {
+      res.status(404).json({
+        status:"Failed To Edit the Admin",
+        error:error.message
+      })
+    }
+  }

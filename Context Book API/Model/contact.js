@@ -2,7 +2,11 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema;
 const contact = new Schema({
-  
+  ref_number:{
+    type:String,
+    unique:true,
+    required:true
+  },
   fullname: {
     type :String,
     required:true
@@ -30,4 +34,4 @@ const contact = new Schema({
 }
 
 });
-module.exports = mongoose.model('user3', contact);
+module.exports = mongoose.model('contact', contact);
